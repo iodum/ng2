@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, ChangeDetectorRef, OnInit, OnChanges, SimpleChanges } from '@angular/core';
-import { GridPlugin } from 'ngx-qgrid';
+import { GridPlugin } from '@qgrid/ngx';
 
 @Component({
 	selector: 'q-grid-progress',
@@ -20,7 +20,10 @@ export class ProgressComponent implements OnInit, OnChanges {
 	}
 
 	ngOnInit() {
-		this.plugin.model.progressChanged.watch(() => this.cd.detectChanges());
+		const { model, observeReply } = this.plugin;
+
+		observeReply(model.progressChanged)
+			.subscribe(() => this.cd.detectChanges());
 	}
 
 	get isBusy() {

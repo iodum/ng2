@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import {
-	GridModule as NgxGridModule,
+	GridModule,
 	ColumnListModule,
 	ColumnModule,
 	DndModule,
@@ -11,15 +11,51 @@ import {
 	ThemeModule,
 	ToolbarModule,
 	VscrollModule,
-} from 'ngx-qgrid';
+	LayerModule,
+} from '@qgrid/ngx';
 
 import {
-	PluginsModule
-} from 'ngx-qgrid/plugins';
+	ActionBarModule,
+	ActionModule,
+	AutoCompleteEditorModule,
+	BackdropModule,
+	BoolEditorModule,
+	CaptionModule,
+	CellEditorModule,
+	ColumnChooserModule,
+	ColumnFilterModule,
+	ColumnSortModule,
+	CommandModule,
+	DataManipulationModule,
+	EbModule,
+	EditFormModule,
+	ExportModule,
+	FileModule,
+	FocusModule,
+	ImportModule,
+	LayoutModule,
+	LegendModule,
+	LiveCellModule,
+	LiveColumnModule,
+	LiveRowModule,
+	PagerModule,
+	PaneModule,
+	PersistenceModule,
+	PipeModule,
+	ProgressModule,
+	QueryBuilderModule,
+	ReferenceEditorModule,
+	RestModule,
+	StatusBarModule,
+	TabTrapModule,
+	TitleModule,
+	ValidationModule,
+	VisibilityModule,
+} from '@qgrid/ngx-plugins';
 
 @NgModule({
 	exports: [
-		NgxGridModule,
+		GridModule,
 		ColumnListModule,
 		ColumnModule,
 		ToolbarModule,
@@ -29,9 +65,45 @@ import {
 		ResizeModule,
 		DndModule,
 		TemplateModule,
-		PluginsModule
+
+		ActionBarModule,
+		ActionModule,
+		AutoCompleteEditorModule,
+		BackdropModule,
+		BoolEditorModule,
+		CaptionModule,
+		CellEditorModule,
+		ColumnChooserModule,
+		ColumnFilterModule,
+		ColumnSortModule,
+		CommandModule,
+		DataManipulationModule,
+		EbModule,
+		EditFormModule,
+		ExportModule,
+		FileModule,
+		FocusModule,
+		ImportModule,
+		LayerModule,
+		LayoutModule,
+		LegendModule,
+		LiveCellModule,
+		LiveColumnModule,
+		LiveRowModule,
+		PagerModule,
+		PaneModule,
+		PersistenceModule,
+		PipeModule,
+		ProgressModule,
+		QueryBuilderModule,
+		ReferenceEditorModule,
+		RestModule,
+		StatusBarModule,
+		TabTrapModule,
+		TitleModule,
+		ValidationModule,
+		VisibilityModule,
 	],
 })
-export class GridModule {
-
+export class Ng2GridModule {
 }

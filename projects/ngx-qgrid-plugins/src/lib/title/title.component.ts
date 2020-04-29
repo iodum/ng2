@@ -1,5 +1,5 @@
 import { Component, ChangeDetectionStrategy, OnInit, ChangeDetectorRef } from '@angular/core';
-import { GridPlugin } from 'ngx-qgrid';
+import { GridPlugin } from '@qgrid/ngx';
 
 // @deprecated
 @Component({
@@ -13,11 +13,16 @@ export class TitleComponent implements OnInit {
 		$implicit: this
 	};
 
-	constructor(private plugin: GridPlugin, private cd: ChangeDetectorRef) {
+	constructor(
+		private plugin: GridPlugin,
+		private cd: ChangeDetectorRef
+	) {
 	}
 
 	ngOnInit() {
-		this.plugin.model.gridChanged.on(() => this.cd.detectChanges());
+		const { model, observe } = this.plugin;
+		observe(model.gridChanged)
+			.subscribe(() => this.cd.detectChanges());
 	}
 
 	get value() {

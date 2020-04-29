@@ -1,6 +1,6 @@
 import { OnDestroy, OnInit, Component, ChangeDetectorRef } from '@angular/core';
-import { Action } from 'qgrid/core/action/action';
-import { GridPlugin } from 'ngx-qgrid';
+import { Action } from '@qgrid/core/action/action';
+import { GridPlugin } from '@qgrid/ngx';
 
 @Component({
 	selector: 'q-grid-action-bar',
@@ -14,26 +14,30 @@ export class ActionBarComponent implements OnInit, OnDestroy {
 		$implicit: this
 	};
 
-	constructor(private plugin: GridPlugin, private cd: ChangeDetectorRef) {
+	constructor(
+		private plugin: GridPlugin,
+		private cd: ChangeDetectorRef
+	) {
 	}
 
 	ngOnInit() {
-		const { model } = this.plugin;
+		const { model, observeReply } = this.plugin;
 
-		model.actionChanged.watch(e => {
-			if (e.hasChanges('items')) {
-				if (this.shortcutOff) {
-					this.shortcutOff();
-					this.shortcutOff = null;
+		observeReply(model.actionChanged)
+			.subscribe(e => {
+				if (e.hasChanges('items')) {
+					if (this.shortcutOff) {
+						this.shortcutOff();
+						this.shortcutOff = null;
+					}
+
+					const { shortcut, manager } = model.action();
+					this.shortcutOff = shortcut.register(manager, e.state.items.map(act => act.command));
+
+					this.cd.markForCheck();
+					this.cd.detectChanges();
 				}
-
-				const { shortcut, manager } = model.action();
-				this.shortcutOff = shortcut.register(manager, e.state.items.map(act => act.command));
-
-				this.cd.markForCheck();
-				this.cd.detectChanges();
-			}
-		});
+			});
 	}
 
 	get actions(): Action[] {
